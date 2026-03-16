@@ -1,3 +1,5 @@
+# Usar IA para instalar outros software como Flutter(futuramente) e MySql
+
 # Base Ubuntu 24.04 (o "24.x" disponível hoje é 24.04
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
