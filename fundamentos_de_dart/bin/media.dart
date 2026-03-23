@@ -1,5 +1,6 @@
 import 'dart:io';
 
+
 void main(){
   stdout.write("Escreva a nota da prova:");
   String? valor1 = stdin.readLineSync();
