@@ -11,6 +11,5 @@ void main(/*List<String> arguments*/){
   int a = 10;
   a == 10 ? print (10) : print ("Não é 10");
   print (a);
-  
 
 }
