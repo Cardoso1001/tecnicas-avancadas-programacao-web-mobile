@@ -1,4 +1,4 @@
-import 'package:tereceiro_trabalho_parcial/tereceiro_trabalho_parcial.dart' as tereceiro_trabalho_parcial;
+import 'package:tereceiro_trabalho_parcial/terceiro_trabalho_parcial.dart' as tereceiro_trabalho_parcial;
 
 void main(List<String> arguments) {
   print('Hello world: ${tereceiro_trabalho_parcial.calculate()}!');
