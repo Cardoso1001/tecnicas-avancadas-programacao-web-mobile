@@ -25,6 +25,29 @@ class EntradaPage extends StatefulWidget { // cada app com suas n Páginas
 }
 
 class EntradaState extends State<EntradaPage> { // e cada página com seu único Estado
+  String nome = ''; // Variável tem que ser global
+  int ano = 0;
+
+  // Controlador serve para auxiliar widgets visuais, modifica-los
+  TextEditingController nomeControlador = /* new não é obrigatório*/ TextEditingController();
+  TextEditingController idadeControlador = TextEditingController();
+
+  void enviar(){ // Método do botão, futuramente colocar até em outros arquivos
+    // "Programação funcional" possui o método anonimo
+    setState(() { // "Método anonimo", por é usado apenas uma vez
+      // Padrão para atualizar em tela os dados
+      nome = nomeControlador.text; // Apenas salvo na memória, precisa dar refresh para aparecer na tela
+      // ano = int.tryParse(idadeControlador.text) ?? 0;
+      // ano = 2026 - ano; 
+    });
+    
+    int idade = int.tryParse(idadeControlador.text) ?? 0;
+    /*Pode ter 2 na função normal*/setState(() {
+      ano = DateTime.now().year /*2026*/ - idade;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +62,7 @@ class EntradaState extends State<EntradaPage> { // e cada página com seu único
               decoration: InputDecoration(
                 labelText: 'Qual é o seu nome?',
               ),
+              controller: nomeControlador,
             ),
 
             SizedBox( // Espaçamento entre widgets, para não ficar colado
@@ -49,6 +73,23 @@ class EntradaState extends State<EntradaPage> { // e cada página com seu único
               decoration: InputDecoration(
                 labelText: 'Qual é a sua idade?',
               ),
+              controller: idadeControlador,
+            ),
+
+            SizedBox(
+              height: 100,
+            ),
+
+            Text('Boa tarde $nome! Você nasceu em $ano!'),
+
+            SizedBox(
+              height: 100,
+            ),
+
+            ElevatedButton(
+              child: Text('Enviar'),
+              onPressed: enviar, // De preferencia criar em um outro método em aplicações maiores a lógica do botão
+              
             ),
           ],
         )
