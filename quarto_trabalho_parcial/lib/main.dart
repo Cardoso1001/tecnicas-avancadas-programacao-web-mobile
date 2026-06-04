@@ -8,11 +8,11 @@ import 'package:quarto_trabalho_parcial/tela6select.dart';
 import 'package:quarto_trabalho_parcial/tela7matriculacompleta.dart';
 
 void main() {
-  // runApp( Tela1App());
-  // runApp( Tela2App());
-  // runApp( Tela3App());
-  // runApp( Tela4App());
-  // runApp( Tela5App());
-  // runApp( Tela6App());
+  runApp( Tela1App());
+  runApp( Tela2App());
+  runApp( Tela3App());
+  runApp( Tela4App());
+  runApp( Tela5App());
+  runApp( Tela6App());
   runApp( Tela7App());
 }
