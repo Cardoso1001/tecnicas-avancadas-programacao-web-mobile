@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Atv3MediaApp extends StatelessWidget {
+  const Atv3MediaApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,6 +14,8 @@ class Atv3MediaApp extends StatelessWidget {
 }
 
 class Atv3MediaPage extends StatefulWidget {
+  const Atv3MediaPage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Atv3MediaState();

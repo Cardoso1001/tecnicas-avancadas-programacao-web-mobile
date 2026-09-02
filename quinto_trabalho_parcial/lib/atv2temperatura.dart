@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Atv2TemperaturaApp extends StatelessWidget {
+  const Atv2TemperaturaApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,6 +14,8 @@ class Atv2TemperaturaApp extends StatelessWidget {
 }
 
 class Atv2TemperaturaPage extends StatefulWidget {
+  const Atv2TemperaturaPage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Atv2TemperaturaState();

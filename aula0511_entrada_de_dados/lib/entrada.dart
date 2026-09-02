@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // SEMPRE 'MATERIAL'
 
-class EntradaApp extends StatelessWidget { // 1 Aplicativo
+class EntradaApp extends StatelessWidget {
+  const EntradaApp({super.key});
+ // 1 Aplicativo
   @override
   Widget build(BuildContext context) { // Build 
     return MaterialApp(
@@ -17,7 +19,9 @@ class EntradaApp extends StatelessWidget { // 1 Aplicativo
 
 // Página stateful, com estado, com interação, com mudança de dados
 // Como a tela de login, por exemplo
-class EntradaPage extends StatefulWidget { // cada app com suas n Páginas
+class EntradaPage extends StatefulWidget {
+  const EntradaPage({super.key});
+ // cada app com suas n Páginas
   @override
   State<StatefulWidget> createState() { // createState
     return EntradaState(); // Estado dessa página
@@ -87,8 +91,8 @@ class EntradaState extends State<EntradaPage> { // e cada página com seu único
             ),
 
             ElevatedButton(
-              child: Text('Enviar'),
-              onPressed: enviar, // De preferencia criar em um outro método em aplicações maiores a lógica do botão
+              onPressed: enviar,
+              child: Text('Enviar'), // De preferencia criar em um outro método em aplicações maiores a lógica do botão
               
             ),
           ],

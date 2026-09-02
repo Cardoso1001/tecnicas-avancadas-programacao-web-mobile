@@ -6,6 +6,8 @@ void main() {
 }
 
 class AMSApp extends StatelessWidget {
+  const AMSApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Atv1ImcApp extends StatelessWidget {
+  const Atv1ImcApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,6 +14,8 @@ class Atv1ImcApp extends StatelessWidget {
 }
 
 class Atv1ImcPage extends StatefulWidget {
+  const Atv1ImcPage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Atv1ImcState();
@@ -74,8 +78,8 @@ class Atv1ImcState extends State<Atv1ImcPage> {
             Text('O seu IMC é ${imc.toStringAsFixed(2)}. Classificação: $classificacao'), // toStringAsFixed(2) para limitar a quantidade de casas decimais
 
             ElevatedButton(
-              child: Text('Calcular IMC'),
               onPressed: enviar,
+              child: Text('Calcular IMC'),
             ),
           ],
         ),

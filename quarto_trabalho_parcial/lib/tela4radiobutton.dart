@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Tela4App extends StatelessWidget{
+  const Tela4App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,6 +15,8 @@ class Tela4App extends StatelessWidget{
 }
 
 class Tela4Page extends StatefulWidget{
+  const Tela4Page({super.key});
+
 @override
   State<StatefulWidget> createState() {
     return Tela4State();

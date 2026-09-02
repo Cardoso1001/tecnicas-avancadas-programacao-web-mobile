@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 
-class ProdutoPage extends StatefulWidget {
-  const ProdutoPage({super.key});
-
+class Exercicio3App extends StatelessWidget {
+  const Exercicio3App({super.key});
   @override
-  State<StatefulWidget> createState() {
-    return ProdutoState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Exercício 3 - Cadastro de aluno',
+      home: Exercicio3Page(),
+    );
   }
 }
 
-class ProdutoState extends State<ProdutoPage> {
+class Exercicio3Page extends StatefulWidget {
+  const Exercicio3Page({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    return Exercicio3State();
+  }
+}
+
+class Exercicio3State extends State<Exercicio3Page> {
+  
   TextEditingController nomeControlador = TextEditingController();
   TextEditingController precoControlador = TextEditingController();
   TextEditingController quantidadeControlador = TextEditingController();
@@ -139,4 +151,5 @@ class ProdutoState extends State<ProdutoPage> {
       )
     );
   }
+
 }

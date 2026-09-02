@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 
 //App é o global, é normal ter apenas 1
 class OlaMundoApp extends StatelessWidget {
+  const OlaMundoApp({super.key});
+
   //comando build
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,8 @@ class OlaMundoApp extends StatelessWidget {
 //Normal ter vários, cada um representando uma tela do aplicativo, ou seja, cada um representando uma página do aplicativo.
 // (nas aulas será apenas 1, mas em um aplicativo real, é normal ter vários)
 class OlaMundoPage extends StatefulWidget {
+  const OlaMundoPage({super.key});
+
   @override
   State<OlaMundoPage> createState() {
     return OlaMundoState();

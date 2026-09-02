@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Atv4AdivinheApp extends StatelessWidget {
+  const Atv4AdivinheApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,6 +15,8 @@ class Atv4AdivinheApp extends StatelessWidget {
 }
 
 class Atv4AdivinhePage extends StatefulWidget {
+  const Atv4AdivinhePage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Atv4AdivinheState();
