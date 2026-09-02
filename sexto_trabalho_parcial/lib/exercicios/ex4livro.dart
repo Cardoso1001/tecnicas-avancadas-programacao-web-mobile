@@ -1,5 +1,49 @@
 import 'package:flutter/material.dart';
 
+// Exercício 4 — Cadastro de Livro
+// Crie uma tela para cadastro de livros contendo os seguintes campos:
+
+// Título;
+// Autor;
+// Número de páginas;
+// Código do livro.
+// Faça as seguintes validações:
+
+// Título
+// Campo obrigatório;
+// Deve possuir entre 2 e 100 caracteres.
+// Autor
+// Campo obrigatório;
+// Deve possuir entre 3 e 100 caracteres.
+// Número de páginas
+// Campo obrigatório;
+// Deve aceitar apenas números inteiros;
+// Deve estar entre 1 e 10.000.
+// Código do livro
+// O código deve seguir o seguinte formato:
+
+// ABC-1234
+
+// Onde:
+
+// As três primeiras posições devem ser letras;
+// Em seguida deve existir um hífen;
+// As quatro últimas posições devem ser números.
+// Exemplos válidos:
+
+// ABC-1234
+// XYZ-0001
+
+// Exemplos inválidos:
+
+// AB-1234
+// ABC1234
+// 123-ABCD
+
+// Caso todos os dados estejam corretos, exiba:
+
+// Livro salvo com sucesso
+
 class Exercicio4App extends StatelessWidget {
   const Exercicio4App({super.key});
   @override
@@ -22,84 +66,85 @@ class Exercicio4Page extends StatefulWidget {
 
 class Exercicio4State extends State<Exercicio4Page> {
   
-  TextEditingController nomeControlador = TextEditingController();
-  TextEditingController precoControlador = TextEditingController();
-  TextEditingController quantidadeControlador = TextEditingController();
+  TextEditingController tituloControlador = TextEditingController();
+  TextEditingController autorControlador = TextEditingController();
+  TextEditingController paginasControlador = TextEditingController();
+  TextEditingController codigoControlador = TextEditingController();
 
   String mensagem = '';
 
   void salvar() {
-    String nome = nomeControlador.text.trim();
-    String preco = precoControlador.text.trim();
-    String quantidade = quantidadeControlador.text.trim();
+    String titulo = tituloControlador.text.trim();
+    String autor = autorControlador.text.trim();
+    String paginas = paginasControlador.text.trim();
+    String codigo = codigoControlador.text.trim();
 
-    if (nome.isEmpty) {
+    if (titulo.isEmpty) {
       setState(() {
-        mensagem = 'O campo nome é obrigatório';
+        mensagem = 'O campo título é obrigatório';
       });
       return;
     }
 
-    if (nome.length < 3 || nome.length > 50) {
+    if (titulo.length < 2 || titulo.length > 100) {
       setState(() {
-        mensagem = 'O nome deve ter entre 3 e 50 caracteres';
-      });
-      return;
-    }
-  
-    if (preco.isEmpty) {
-      setState(() {
-        mensagem = 'O campo preço é obrigatório';
+        mensagem = 'O título deve ter entre 2 e 100 caracteres';
       });
       return;
     }
 
-     if (!RegExp(r'^\d+([,.]\d{1,2})?$').hasMatch(preco)) {
+    if (autor.isEmpty) {
       setState(() {
-        mensagem = 'O preço deve ter no máximo duas casas decimais';
+        mensagem = 'O campo autor é obrigatório';
       });
       return;
     }
 
-    double? precoConvertido = double.tryParse(preco.replaceAll(',', '.'));
-    if (precoConvertido == null) {
+    if (autor.length < 3 || autor.length > 100) {
       setState(() {
-        mensagem = 'Informe um preço válido';
+        mensagem = 'O autor deve ter entre 3 e 100 caracteres';
       });
       return;
     }
 
-    if (precoConvertido < 0.10 || precoConvertido > 1000) {
+    if (paginas.isEmpty) {
       setState(() {
-        mensagem = 'O preço deve estar entre R\$ 0,10 e R\$ 1000,00';
-      });
-      return;
-    } 
-
-    if(quantidade.isEmpty) {
-      setState(() {
-        mensagem = 'O campo quantidade é obrigatório';
+        mensagem = 'O campo número de páginas é obrigatório';
       });
       return;
     }
 
-    int? quantidadeConvertida = int.tryParse(quantidade);
-    if (quantidadeConvertida == null) {
+    int? paginasConvertidas = int.tryParse(paginas);
+    if (paginasConvertidas == null) {
       setState(() {
-        mensagem = 'Informe uma quantidade válida';
+        mensagem = 'Informe um número de páginas válido';
       });
       return;
     }
 
-    if (quantidadeConvertida < 1 || quantidadeConvertida > 100) {
+    if (paginasConvertidas < 1 || paginasConvertidas > 10000) {
       setState(() {
-        mensagem = 'A quantidade deve estar entre 1 e 100';
+        mensagem = 'O número de páginas deve estar entre 1 e 10.000';
       });
       return;
-    } 
+    }
+
+    if (codigo.isEmpty) {
+      setState(() {
+        mensagem = 'O campo código do livro é obrigatório';
+      });
+      return;
+    }
+
+    if (!RegExp(r'^[A-Za-z]{3}-\d{4}$').hasMatch(codigo)) {
+      setState(() {
+        mensagem = 'O código do livro deve seguir o formato ABC-1234';
+      });
+      return;
+    }
 
     setState(() {
-      mensagem = 'Produto salvo com sucesso';
+      mensagem = 'Livro salvo com sucesso';
     });  
   }
 
@@ -107,39 +152,47 @@ class Exercicio4State extends State<Exercicio4Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Produto'),
+        title: Text('Cadastro de Livro'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
             TextField(
-              controller: nomeControlador,
+              controller: tituloControlador,
               decoration: InputDecoration(
-                labelText: 'Nome do Produto',
-                hintText: 'Ex: Coca Cola 2 Litros',
+                labelText: 'Título do Livro',
+                hintText: 'Ex: Dom Casmurro',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
             TextField(
-              controller: precoControlador,
+              controller: autorControlador,
               decoration: InputDecoration(
-                labelText: 'Preço do Produto',
-                hintText: 'Ex: 12,50',
+                labelText: 'Autor do Livro',
+                hintText: 'Ex: Machado de Assis',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
             TextField(
-              controller: quantidadeControlador,
+              controller: paginasControlador,
               decoration: InputDecoration(
-                labelText: 'Quantidade do Produto',
-                hintText: 'Ex: 10',
+                labelText: 'Número de Páginas',
+                hintText: 'Ex: 300',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
+            TextField(
+              controller: codigoControlador,
+              decoration: InputDecoration(
+                labelText: 'Código do Livro',
+                hintText: 'Ex: ABC-1234',
+                border: OutlineInputBorder(),
+              ),
+            ),
             Text(mensagem),
             SizedBox(height: 10,),
             ElevatedButton(

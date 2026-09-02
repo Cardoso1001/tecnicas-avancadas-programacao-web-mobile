@@ -1,5 +1,32 @@
 import 'package:flutter/material.dart';
 
+// Exercício 1 — Cadastro de Veículo
+// Crie uma tela para cadastrar um veículo contendo os seguintes campos:
+
+// Marca;
+// Modelo;
+// Ano;
+// Preço.
+// Faça as seguintes validações:
+
+// Marca
+// Campo obrigatório;
+// Deve possuir entre 2 e 50 caracteres.
+// Modelo
+// Campo obrigatório;
+// Deve possuir entre 2 e 50 caracteres.
+// Ano
+// Campo obrigatório;
+// Deve ser um número inteiro;
+// Deve estar entre 1900 e 2026.
+// Preço
+// Campo obrigatório;
+// Deve aceitar valores decimais utilizando ponto ou vírgula;
+// Deve possuir no máximo duas casas decimais;
+// Deve estar entre R$ 1.000,00 e R$ 1.000.000,00.
+// Caso todos os dados estejam corretos, exiba:
+
+// Veículo salvo com sucesso
 class Exercicio1App extends StatelessWidget {
   const Exercicio1App({super.key});
   @override
@@ -116,7 +143,7 @@ class Exercicio1State extends State<Exercicio1Page> {
     } 
 
     setState(() {
-      mensagem = 'Produto salvo com sucesso';
+      mensagem = 'Veículo salvo com sucesso';
     });  
   }
 

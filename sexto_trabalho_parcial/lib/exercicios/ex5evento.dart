@@ -1,5 +1,35 @@
 import 'package:flutter/material.dart';
 
+// Exercício 5 — Cadastro de Evento
+// Crie uma tela para cadastrar um evento contendo os seguintes campos:
+
+// Nome do evento;
+// Quantidade mínima de participantes;
+// Quantidade máxima de participantes;
+// Valor do ingresso.
+// Faça as seguintes validações:
+
+// Nome do evento
+// Campo obrigatório;
+// Deve possuir entre 5 e 100 caracteres.
+// Quantidade mínima de participantes
+// Campo obrigatório;
+// Deve ser um número inteiro;
+// Não pode ser menor que 1.
+// Quantidade máxima de participantes
+// Campo obrigatório;
+// Deve ser um número inteiro;
+// Deve estar entre 1 e 50.000;
+// Não pode ser menor que a quantidade mínima de participantes.
+// Valor do ingresso
+// Campo obrigatório;
+// Deve aceitar números decimais utilizando vírgula ou ponto;
+// Deve possuir no máximo duas casas decimais;
+// Deve estar entre R$ 0,00 e R$ 10.000,00.
+// Caso todos os dados estejam corretos, exiba:
+
+// Evento salvo com sucesso
+
 class Exercicio5App extends StatelessWidget {
   const Exercicio5App({super.key});
   @override
@@ -23,15 +53,17 @@ class Exercicio5Page extends StatefulWidget {
 class Exercicio5State extends State<Exercicio5Page> {
   
   TextEditingController nomeControlador = TextEditingController();
-  TextEditingController precoControlador = TextEditingController();
-  TextEditingController quantidadeControlador = TextEditingController();
+  TextEditingController quantidadeMinimaControlador = TextEditingController();
+  TextEditingController quantidadeMaximaControlador = TextEditingController();
+  TextEditingController valorIngressoControlador = TextEditingController();
 
   String mensagem = '';
 
   void salvar() {
     String nome = nomeControlador.text.trim();
-    String preco = precoControlador.text.trim();
-    String quantidade = quantidadeControlador.text.trim();
+    String quantidadeMinima = quantidadeMinimaControlador.text.trim();
+    String quantidadeMaxima = quantidadeMaximaControlador.text.trim();
+    String valorIngresso = valorIngressoControlador.text.trim();
 
     if (nome.isEmpty) {
       setState(() {
@@ -40,60 +72,75 @@ class Exercicio5State extends State<Exercicio5Page> {
       return;
     }
 
-    if (nome.length < 3 || nome.length > 50) {
+    if (nome.length < 5 || nome.length > 100) {
       setState(() {
-        mensagem = 'O nome deve ter entre 3 e 50 caracteres';
+        mensagem = 'O nome deve ter entre 5 e 100 caracteres';
       });
       return;
     }
   
-    if (preco.isEmpty) {
+    if (valorIngresso.isEmpty) {
       setState(() {
-        mensagem = 'O campo preço é obrigatório';
+        mensagem = 'O campo valor do ingresso é obrigatório';
       });
       return;
     }
 
-     if (!RegExp(r'^\d+([,.]\d{1,2})?$').hasMatch(preco)) {
+     if (!RegExp(r'^\d+([,.]\d{1,2})?$').hasMatch(valorIngresso)) {
       setState(() {
-        mensagem = 'O preço deve ter no máximo duas casas decimais';
+        mensagem = 'O valor do ingresso deve ter no máximo duas casas decimais';
       });
       return;
     }
 
-    double? precoConvertido = double.tryParse(preco.replaceAll(',', '.'));
-    if (precoConvertido == null) {
+    double? valorConvertido = double.tryParse(valorIngresso.replaceAll(',', '.'));
+    if (valorConvertido == null) {
       setState(() {
-        mensagem = 'Informe um preço válido';
+        mensagem = 'Informe um valor de ingresso válido';
       });
       return;
     }
 
-    if (precoConvertido < 0.10 || precoConvertido > 1000) {
+    if (valorConvertido < 0.10 || valorConvertido > 1000) {
       setState(() {
-        mensagem = 'O preço deve estar entre R\$ 0,10 e R\$ 1000,00';
+        mensagem = 'O valor do ingresso deve estar entre R\$ 0,10 e R\$ 1000,00';
       });
       return;
     } 
 
-    if(quantidade.isEmpty) {
+    if(quantidadeMinima.isEmpty) {
       setState(() {
-        mensagem = 'O campo quantidade é obrigatório';
+        mensagem = 'O campo quantidade mínima é obrigatório';
       });
       return;
     }
 
-    int? quantidadeConvertida = int.tryParse(quantidade);
-    if (quantidadeConvertida == null) {
+    int? quantidadeMinimaConvertida = int.tryParse(quantidadeMinima);
+    if (quantidadeMinimaConvertida == null) {
       setState(() {
-        mensagem = 'Informe uma quantidade válida';
+        mensagem = 'Informe uma quantidade mínima válida';
       });
       return;
     }
 
-    if (quantidadeConvertida < 1 || quantidadeConvertida > 100) {
+    if (quantidadeMaxima.isEmpty) {
       setState(() {
-        mensagem = 'A quantidade deve estar entre 1 e 100';
+        mensagem = 'O campo quantidade máxima é obrigatório';
+      });
+      return;
+    }
+
+    int? quantidadeMaximaConvertida = int.tryParse(quantidadeMaxima);
+    if (quantidadeMaximaConvertida == null) {
+      setState(() {
+        mensagem = 'Informe uma quantidade máxima válida';
+      });
+      return;
+    }
+
+    if (quantidadeMinimaConvertida > quantidadeMaximaConvertida) {
+      setState(() {
+        mensagem = 'A quantidade mínima não pode ser maior que a quantidade máxima';
       });
       return;
     } 
@@ -107,7 +154,7 @@ class Exercicio5State extends State<Exercicio5Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Produto'),
+        title: Text('Cadastro de Evento'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
@@ -116,26 +163,35 @@ class Exercicio5State extends State<Exercicio5Page> {
             TextField(
               controller: nomeControlador,
               decoration: InputDecoration(
-                labelText: 'Nome do Produto',
-                hintText: 'Ex: Coca Cola 2 Litros',
+                labelText: 'Nome do Evento',
+                hintText: 'Ex: Show de Rock',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
             TextField(
-              controller: precoControlador,
+              controller: valorIngressoControlador,
               decoration: InputDecoration(
-                labelText: 'Preço do Produto',
+                labelText: 'Preço do Evento',
                 hintText: 'Ex: 12,50',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
             TextField(
-              controller: quantidadeControlador,
+              controller: quantidadeMinimaControlador,
               decoration: InputDecoration(
-                labelText: 'Quantidade do Produto',
+                labelText: 'Quantidade Mínima',
                 hintText: 'Ex: 10',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10,),
+            TextField(
+              controller: quantidadeMaximaControlador,
+              decoration: InputDecoration(
+                labelText: 'Quantidade Máxima',
+                hintText: 'Ex: 100',
                 border: OutlineInputBorder(),
               ),
             ),

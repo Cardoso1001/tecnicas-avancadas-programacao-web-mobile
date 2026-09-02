@@ -1,5 +1,27 @@
 import 'package:flutter/material.dart';
 
+// Exercício 3 — Cadastro de Aluno
+// Crie uma tela para cadastro de um aluno contendo os seguintes campos:
+
+// Nome;
+// Idade;
+// E-mail.
+// Faça as seguintes validações:
+
+// Nome
+// Campo obrigatório;
+// Deve possuir entre 3 e 50 caracteres.
+// Idade
+// Campo obrigatório;
+// Deve ser um número inteiro;
+// Deve estar entre 10 e 100.
+// E-mail
+// Campo obrigatório;
+// Deve conter o caractere @.
+// Caso todos os dados estejam corretos, exiba:
+
+// Aluno salvo com sucesso
+
 class Exercicio3App extends StatelessWidget {
   const Exercicio3App({super.key});
   @override
@@ -23,15 +45,15 @@ class Exercicio3Page extends StatefulWidget {
 class Exercicio3State extends State<Exercicio3Page> {
   
   TextEditingController nomeControlador = TextEditingController();
-  TextEditingController precoControlador = TextEditingController();
-  TextEditingController quantidadeControlador = TextEditingController();
+  TextEditingController idadeControlador = TextEditingController();
+  TextEditingController emailControlador = TextEditingController();
 
   String mensagem = '';
 
   void salvar() {
     String nome = nomeControlador.text.trim();
-    String preco = precoControlador.text.trim();
-    String quantidade = quantidadeControlador.text.trim();
+    String idade = idadeControlador.text.trim();
+    String email = emailControlador.text.trim();
 
     if (nome.isEmpty) {
       setState(() {
@@ -46,60 +68,45 @@ class Exercicio3State extends State<Exercicio3Page> {
       });
       return;
     }
-  
-    if (preco.isEmpty) {
+
+    if(idade.isEmpty) {
       setState(() {
-        mensagem = 'O campo preço é obrigatório';
+        mensagem = 'O campo idade é obrigatório';
       });
       return;
     }
 
-     if (!RegExp(r'^\d+([,.]\d{1,2})?$').hasMatch(preco)) {
+    int? idadeConvertida = int.tryParse(idade);
+    if (idadeConvertida == null) {
       setState(() {
-        mensagem = 'O preço deve ter no máximo duas casas decimais';
+        mensagem = 'Informe uma idade válida';
       });
       return;
     }
 
-    double? precoConvertido = double.tryParse(preco.replaceAll(',', '.'));
-    if (precoConvertido == null) {
+    if (idadeConvertida < 10 || idadeConvertida > 100) {
       setState(() {
-        mensagem = 'Informe um preço válido';
+        mensagem = 'A idade deve estar entre 10 e 100';
       });
       return;
     }
 
-    if (precoConvertido < 0.10 || precoConvertido > 1000) {
+    if(email.isEmpty) {
       setState(() {
-        mensagem = 'O preço deve estar entre R\$ 0,10 e R\$ 1000,00';
-      });
-      return;
-    } 
-
-    if(quantidade.isEmpty) {
-      setState(() {
-        mensagem = 'O campo quantidade é obrigatório';
+        mensagem = 'O campo e-mail é obrigatório';
       });
       return;
     }
 
-    int? quantidadeConvertida = int.tryParse(quantidade);
-    if (quantidadeConvertida == null) {
+    if (!email.contains('@')) {
       setState(() {
-        mensagem = 'Informe uma quantidade válida';
-      });
-      return;
-    }
-
-    if (quantidadeConvertida < 1 || quantidadeConvertida > 100) {
-      setState(() {
-        mensagem = 'A quantidade deve estar entre 1 e 100';
+        mensagem = 'O e-mail deve conter o caractere @';
       });
       return;
     } 
 
     setState(() {
-      mensagem = 'Produto salvo com sucesso';
+      mensagem = 'Aluno salvo com sucesso';
     });  
   }
 
@@ -107,7 +114,7 @@ class Exercicio3State extends State<Exercicio3Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de Produto'),
+        title: Text('Cadastro de Aluno'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
@@ -116,26 +123,26 @@ class Exercicio3State extends State<Exercicio3Page> {
             TextField(
               controller: nomeControlador,
               decoration: InputDecoration(
-                labelText: 'Nome do Produto',
-                hintText: 'Ex: Coca Cola 2 Litros',
+                labelText: 'Nome do Aluno',
+                hintText: 'Ex: João da Silva',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
             TextField(
-              controller: precoControlador,
+              controller: idadeControlador,
               decoration: InputDecoration(
-                labelText: 'Preço do Produto',
-                hintText: 'Ex: 12,50',
+                labelText: 'Idade do Aluno',
+                hintText: 'Ex: 25',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 10,),
             TextField(
-              controller: quantidadeControlador,
+              controller: emailControlador,
               decoration: InputDecoration(
-                labelText: 'Quantidade do Produto',
-                hintText: 'Ex: 10',
+                labelText: 'E-mail do Aluno',
+                hintText: 'Ex: joao.silva@example.com',
                 border: OutlineInputBorder(),
               ),
             ),
